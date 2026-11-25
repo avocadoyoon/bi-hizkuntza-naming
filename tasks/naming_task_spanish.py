@@ -473,7 +473,7 @@ if _missing:
     print('NO PIP FOUND at the start of %d recording(s):' % len(_missing))
     for m in _missing:
         print('   ', m)
-    print('Tell Nursena before running anyone else - the onset marker is')
+    print('Tell Nursena before running anyone else - the onset marker is') # warning for the RAs, can be omitted/edited.
     print('what makes a naming latency recoverable.')
 else:
     print('Pip found at the start of all %d recordings.' % len(_rows))
