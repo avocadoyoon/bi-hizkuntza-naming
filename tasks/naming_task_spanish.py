@@ -130,7 +130,7 @@ if IN_DEVICE is not None:
     print('microphone: device %s (from %s)' % (IN_DEVICE, SETTINGS_PATH))
 else:
     print('No AUDIO_SETTINGS.txt found above this folder; using the default input.')
-    print('On the lab computer the task should sit inside PROSIA_tasks_for_lab '
+    print('On the lab computer the task should sit inside XXX'
           'so it picks up the same device numbers as the other tasks.')
 INPUT_MODE = use_exclusive_input(IN_DEVICE)
 print('capture mode: %s' % INPUT_MODE)
@@ -167,10 +167,6 @@ def _fold(s):
     the other 78 pictures were fine.
     """
     s = unicodedata.normalize('NFC', _strip_exts(s)).lower()
-    # Runs of underscores and spaces are collapsed. The names use a double
-    # underscore between the word and the picture file, and retyping one of
-    # them by hand at the lab produced a single one - invisible on screen,
-    # fatal to a string comparison. 
     s = re.sub(r'[_\s]+', '_', s).strip('_')
     bare = ''.join(c for c in unicodedata.normalize('NFD', s)
                    if not unicodedata.combining(c))
@@ -351,7 +347,6 @@ def open_streams():
 
 
 def start_trial_audio():
-    """Fire the pip and begin keeping the microphone input. On the flip."""
     _pip_pos[0] = 0
     del _rec_buf[:]
     _rec_on[0] = True
@@ -430,10 +425,7 @@ for n, it in enumerate(items):
     w, h = Image.open(it['path']).size
     pic = visual.ImageStim(win, image=it['path'], size=(PIC_HEIGHT * w / h, PIC_HEIGHT))
     fix.draw(); win.flip(); core.wait(FIX_DUR)
-
-    # Both streams are already running; these only flip a flag and rewind
-    # the pip, so they cost nothing and happen on the exact frame the
-    # picture goes up.
+  
     win.callOnFlip(clock.reset)
     win.callOnFlip(start_trial_audio)
     pic.draw(); win.flip(); event.clearEvents()
